@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Developer Interview Question Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .question {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+  
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Developer Interview Question Quiz</h1>
+        <div class="question" id="question">
+            Click below to get a random interview question.
+        </div>
+        <br>
+        <div class="answer" id="answer">
+            
+        </div>
+        <br>
+        <button id="getQuestionBtn">Get Question</button>
+    </div>
+
+    <script>
+        const questions = [
+            { 
+                question: "What is closure in JavaScript?",
+                answer: "Closure is the combination of a function and the lexical environment within which that function was declared."
+            },
+            {
+                question: "Explain the difference between '==' and '===' operators in JavaScript.",
+                answer: "'==' is the equality operator that performs type coercion if the operands are of different types, while '===' is the strict equality operator that does not perform type coercion and checks both value and type equality."
+            },
+            {
+                question: "What is a RESTful API?",
+                answer: "A RESTful API is an architectural style for designing networked applications. It uses standard HTTP methods like GET, POST, PUT, DELETE to perform CRUD operations."
+            },
+            {
+                question: "What is the difference between SQL and NoSQL databases?",
+                answer: "SQL databases are relational databases that store data in tables with predefined schemas, while NoSQL databases are non-relational databases that store data in flexible JSON-like documents."
+            },
+            {
+                question: "What is responsive web design and why is it important?",
+                answer: "Responsive web design is an approach to designing web pages that ensure optimal viewing and interaction experiences across various devices and screen sizes. It is important because it improves user experience and SEO rankings."
+            },
+            {
+                question: "Explain the concept of 'promises' in JavaScript.",
+                answer: "Promises are objects representing the eventual completion or failure of an asynchronous operation. They allow asynchronous code to be written in a more synchronous fashion, making it easier to read and maintain."
+            },
+            {
+                question: "What is the difference between 'var', 'let', and 'const' in JavaScript?",
+                answer: "'var' is function-scoped and can be redeclared and reassigned. 'let' and 'const' are block-scoped and cannot be redeclared. 'let' can be reassigned, while 'const' cannot."
+            },
+            {
+                question: "What is version control and why is it important for developers?",
+                answer: "Version control is a system that records changes to a file or set of files over time so that you can recall specific versions later. It is important for developers because it enables collaboration, tracks changes, and provides backup and restore capabilities."
+            },
+            {
+                question: "Explain the concept of 'hoisting' in JavaScript.",
+                answer: "Hoisting is a JavaScript mechanism where variables and function declarations are moved to the top of their containing scope during the compile phase. This means that you can use variables and functions before they are declared."
+            },
+            {
+                question: "What is the 'box model' in CSS?",
+                answer: "The box model is a fundamental concept in CSS that describes how elements are displayed on the web. It consists of content, padding, border, and margin."
+            },
+            {
+                question: "What is the difference between 'GET' and 'POST' methods in HTTP?",
+                answer: "'GET' is used to request data from a specified resource, while 'POST' is used to submit data to be processed to a specified resource."
+            },
+            {
+                question: "What is event bubbling and event capturing in JavaScript?",
+                answer: "Event bubbling is the process where an event is first captured by the innermost element and then propagated to outer elements. Event capturing is the reverse process, where an event is first captured by the outermost element and then propagated to inner elements."
+            },
+            {
+                question: "Explain the concept of 'lexical scope' in JavaScript.",
+                answer: "Lexical scope is a scope in which variables are defined based on their position in the source code. It means that variables are accessible within the function they are declared in, as well as any nested functions."
+            },
+            {
+                question: "What is the 'this' keyword in JavaScript and how does it work?",
+                answer: "The 'this' keyword refers to the object it belongs to. It can have different values depending on where it is used: in a method, 'this' refers to the owner object; in a function, 'this' refers to the global object; in an event, 'this' refers to the element that triggered the event."
+            },
+            {
+                question: "What is the purpose of the 'use strict' directive in JavaScript?",
+                answer: "The 'use strict' directive enables strict mode in JavaScript, which catches common coding mistakes and makes it easier to write secure and optimized code. It also prevents the use of certain unsafe features and reserved keywords."
+            },
+            {
+                question: "What is the difference between 'null' and 'undefined' in JavaScript?",
+                answer: "'null' represents the intentional absence of any value, while 'undefined' represents the absence of a value that has not been assigned. 'null' is a value of the Null type, while 'undefined' is a primitive type."
+            },
+            {
+                question: "Explain the concept of event delegation in JavaScript.",
+                answer: "Event delegation is a technique where a single event listener is attached to a parent element instead of multiple event listeners attached to individual child elements. This allows dynamically added child elements to respond to events without needing to add new event listeners."
+            },
+            {
+                question: "What is the purpose of the 'async' and 'await' keywords in JavaScript?",
+                answer: "The 'async' keyword is used to declare an asynchronous function, which returns a Promise. The 'await' keyword is used to wait for a Promise to be resolved, and it can only be used inside an async function."
+            },
+            {
+                question: "Explain the concept of 'callback hell' in JavaScript and how to avoid it.",
+                answer: "'Callback hell' refers to the situation where multiple nested callbacks make the code difficult to read and maintain. It can be avoided by using Promises, async/await, or modularizing code."
+            },
+            {
+                question: "What is a closure in JavaScript and how does it work?",
+                answer: "A closure is a combination of a function and the lexical environment within which that function was declared. It allows a function to retain access to variables from its parent scope even after the parent function has finished executing."
+            },
+            {
+                question: "What are arrow functions in JavaScript and how do they differ from regular functions?",
+                answer: "Arrow functions are a more concise syntax for writing function expressions in JavaScript. They do not have their own 'this' and 'arguments' bindings, and they cannot be used as constructors."
+            },
+            {
+                question: "What are the differences between 'null' and 'undefined'?",
+                answer: "'null' is a deliberate non-value or a placeholder for an empty or non-existent value, whereas 'undefined' typically means a variable has been declared but has not been assigned a value."
+            },
+            {
+                question: "What is the difference between '==' and '===' operators in JavaScript?",
+                answer: "'==' checks for equality after performing type coercion, whereas '===' checks for equality without type coercion."
+            },
+            {
+                question: "Explain the difference between 'var', 'let', and 'const' in JavaScript.",
+                answer: "'var' is function-scoped and can be redeclared and reassigned, 'let' is block-scoped and can be reassigned but not redeclared, and 'const' is block-scoped and cannot be reassigned or redeclared."
+            },
+            {
+                question: "What is a RESTful API?",
+                answer: "A RESTful API is an architectural style for designing networked applications. It uses standard HTTP methods like GET, POST, PUT, DELETE to perform CRUD operations."
+            },
+            {
+                question: "What is the difference between SQL and NoSQL databases?",
+                answer: "SQL databases are relational databases that store data in tables with predefined schemas, while NoSQL databases are non-relational databases that store data in flexible JSON-like documents."
+            },
+            {
+                question: "What is responsive web design and why is it important?",
+                answer: "Responsive web design is an approach to designing web pages that ensure optimal viewing and interaction experiences across various devices and screen sizes. It is important because it improves user experience and SEO rankings."
+            },
+            {
+                question: "Explain the concept of 'promises' in JavaScript.",
+                answer: "Promises are objects representing the eventual completion or failure of an asynchronous operation. They allow asynchronous code to be written in a more synchronous fashion, making it easier to read and maintain."
+            },
+            {
+                question: "What is the difference between 'var', 'let', and 'const' in JavaScript?",
+                answer: "'var' is function-scoped and can be redeclared and reassigned. 'let' and 'const' are block-scoped and cannot be redeclared. 'let' can be reassigned, while 'const' cannot."
+            },
+            {
+                question: "What is version control and why is it important for developers?",
+                answer: "Version control is a system that records changes to a file or set of files over time so that you can recall specific versions later. It is important for developers because it enables collaboration, tracks changes, and provides backup and restore capabilities."
+            },
+            {
+                question: "Explain the concept of 'hoisting' in JavaScript.",
+                answer: "Hoisting is a JavaScript mechanism where variables and function declarations are moved to the top of their containing scope during the compile phase. This means that you can use variables and functions before they are declared."
+            }
+        ];
+
+        const questionElement = document.getElementById("question");
+        const answerElement = document.getElementById("answer");
+        const getQuestionBtn = document.getElementById("getQuestionBtn");
+
+        getQuestionBtn.addEventListener("click", function() {
+            const randomIndex = Math.floor(Math.random() * questions.length);
+            questionElement.textContent = questions[randomIndex].question;
+            answerElement.textContent = "Answer: " + questions[randomIndex].answer;
+        });
+    </script>
+</body>
+</html>
